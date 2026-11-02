@@ -19,6 +19,8 @@
 *,*::before,*::after{box-sizing:border-box}
 html{background:#e7d2c9;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 html.locked,html.locked body{overflow:hidden;height:100%}
+/* While the curtains are closed the browser bars (iPhone Safari) should pick up the velvet, not the pale page behind it. */
+html.curtained,html.curtained body{background:#5a1429}
 body{margin:0;font:500 18px/1.5 var(--serif);color:var(--ink);-webkit-font-smoothing:antialiased;background:#e7d2c9 url('assets/cotton-paper.webp') center/420px;background-blend-mode:multiply}
 h1,h2,h3,p,ol{margin:0;padding:0}
 h1,h2,h3{font-weight:400}
@@ -89,13 +91,13 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .dunes{position:absolute;left:-18%;right:-18%;bottom:-4.5%;pointer-events:none}
 .dunes svg{display:block;width:100%;height:auto}
 .dunes{-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
-.camel{position:absolute;bottom:-.3%;width:clamp(50px,15.5vw,66px);pointer-events:none}
-.camel-l{right:calc(100% - 7% + 9px)}
-.camel-r{left:calc(100% - 7% + 9px)}
+.camel{--cw:clamp(48px,14.5vw,62px);position:absolute;bottom:-5.5%;width:var(--cw);pointer-events:none}
+.camel-l{left:calc(50% - 30px - var(--cw))}
+.camel-r{left:calc(50% + 30px)}
 .camel img{display:block;width:100%;height:auto}
 /* The camels walk in from either side of the screen and settle beside the arch, rocking gently with each step. */
-.js .camel-l{transform:translateX(calc(-100% - 70vw))}
-.js .camel-r{transform:translateX(calc(100% + 70vw))}
+.js .camel-l{transform:translateX(calc(-1 * (min(100vw,480px) / 2 + 10px)))}
+.js .camel-r{transform:translateX(calc(min(100vw,480px) / 2 + 10px))}
 .js .camel.in{transform:none;transition:transform 3.2s cubic-bezier(.25,.55,.35,1)}
 .js .camel.in img{animation:camel-step .64s ease-in-out 5}
 @keyframes camel-step{0%,100%{translate:0 0}25%{translate:0 -2.5px}50%{translate:0 0}75%{translate:0 -1.5px}}
@@ -110,7 +112,7 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 @supports (width:1cqw){.traditions h2{font-size:9.3cqw}}
 .duo{display:flex;align-items:center;gap:10px;margin-top:14px;font:600 11px/1 var(--serif);letter-spacing:.26em;text-transform:uppercase;color:var(--ink-faint)}
 .duo b{width:16px;height:1px;background:var(--red)}
-@supports (width:1cqw){.duo{gap:3cqw;margin-top:4.2cqw;font-size:max(9.5px,3.3cqw)}.duo b{width:4.8cqw}}
+@supports (width:1cqw){.duo{gap:2.4cqw;margin-top:4.2cqw;font-size:max(9px,3.1cqw);letter-spacing:.2em;white-space:nowrap}.duo b{width:4.8cqw}}
 .traditions .prose{font-size:17px;margin-top:12px;max-width:220px}
 @supports (width:1cqw){.traditions .prose{font-size:max(14.5px,5.1cqw);margin-top:3.6cqw;max-width:66cqw}}
 

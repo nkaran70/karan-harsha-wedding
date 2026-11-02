@@ -198,7 +198,7 @@
       doors.classList.remove('pressing');
       doors.classList.add('open');
       anims = curtainAnims();
-      later(() => invite.classList.add('opened'), lift() + 300);
+      later(() => { invite.classList.add('opened'); setBars(false); }, lift() + 300);
       later(() => petals.burst(54, 1800), lift() + 650);
       later(() => {
         doors.hidden = true;
@@ -223,6 +223,7 @@
       anims.forEach(a => { a.finish(); a.reverse(); });
       void doors.offsetWidth;
       doors.classList.remove('open');
+      setBars(true);
       later(() => {
         stopCurtains();
         invite.classList.remove('opened');
@@ -246,6 +247,12 @@
   // An element fully hidden by its own clip-path never intersects, so clip reveals watch their parent.
   const watchers = new Map();
   let camelsDone = 0;
+  // Browser bars take the curtain's velvet while it is closed, and the page's cream once it is open.
+  const themeMeta = document.querySelector('meta[name=theme-color]');
+  function setBars(closed) {
+    root.classList.toggle('curtained', closed);
+    if (themeMeta) themeMeta.content = closed ? '#5a1429' : '#efe2d6';
+  }
   const io = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -260,6 +267,7 @@
     });
   }, {rootMargin: '0px 0px -12% 0px', threshold: .12}) : null;
   function observeAll() {
+    camelsDone = 0;
     if (!io) { revealables().forEach(el => el.classList.add('in')); return; }
     revealables().forEach(el => {
       const target = el.matches('.unroll, .bloom-arch') ? el.parentElement : el.matches('.walk-in') ? el.parentElement : el;   // the camels set off as soon as the arch appears, well before the Celebrations
