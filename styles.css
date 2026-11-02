@@ -1,0 +1,314 @@
+@font-face{font-family:Cormorant;src:url('assets/fonts/cormorant-garamond-latin.woff2') format('woff2');font-style:normal;font-weight:400 700;font-display:swap}
+@font-face{font-family:Cormorant;src:url('assets/fonts/cormorant-garamond-italic-latin.woff2') format('woff2');font-style:italic;font-weight:400 700;font-display:swap}
+@font-face{font-family:Pinyon;src:url('assets/fonts/pinyon-script-latin.woff2') format('woff2');font-display:block}
+@font-face{font-family:'Tiro Telugu';src:url('assets/fonts/tiro-telugu-subset.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'Tiro Devanagari';src:url('assets/fonts/tiro-devanagari-subset.woff2') format('woff2');font-display:swap}
+
+:root{
+  --ink:#3d1d25;--ink-soft:#5a383d;--ink-faint:#6e4a45;--red:#b3182f;
+  --rose:#8c2f4a;--maroon:#5e1328;--gold:#a8803e;
+  --serif:Cormorant,'Cormorant Garamond',Georgia,serif;
+  --script:Pinyon,'Pinyon Script',cursive;
+  --col:min(100vw,480px);
+  --vh:100vh;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:light;
+}
+@supports (height:100svh){:root{--vh:100svh}}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:#e7d2c9;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html.locked,html.locked body{overflow:hidden;height:100%}
+body{margin:0;font:500 18px/1.5 var(--serif);color:var(--ink);-webkit-font-smoothing:antialiased;background:#e7d2c9 url('assets/cotton-paper.webp') center/420px;background-blend-mode:multiply}
+h1,h2,h3,p,ol{margin:0;padding:0}
+h1,h2,h3{font-weight:400}
+ol{list-style:none}
+img,svg{display:block}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+a{color:inherit;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:1.5px solid var(--rose);outline-offset:4px;border-radius:4px}
+.sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.art{width:100%;height:auto;overflow:visible}
+
+/* ─── Cotton paper ─────────────────────────────────────────── */
+.invite{position:relative;width:var(--col);margin:0 auto;overflow:hidden;background-color:#f5ebe2;
+  background-image:url('assets/cotton-paper.webp'),linear-gradient(180deg,#f8f0e8,#f3e7de 50%,#f6ede5);
+  background-size:512px,auto;background-blend-mode:multiply,normal;
+  box-shadow:0 0 0 1px rgba(120,70,60,.08),0 30px 80px -20px rgba(80,30,35,.35)}
+
+.label{font:600 12px/1.4 var(--serif);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-faint);padding-left:.3em}
+.sec h2{font:500 clamp(36px,10.5vw,44px)/1.04 var(--serif);letter-spacing:-.005em;color:var(--ink);text-wrap:balance}
+.sec h2 em,.hero em{font-style:italic;color:var(--rose)}
+.prose{font:italic 500 19px/1.5 var(--serif);color:var(--ink-soft);max-width:300px;margin:14px auto 0;text-wrap:pretty}
+.rule{display:block;width:60px;height:1px;margin:18px auto;background:linear-gradient(90deg,transparent,var(--gold),#e6cd92,var(--gold),transparent)}
+
+/* ─── Hero ─────────────────────────────────────────────────── */
+/* A gilt-ruled card: thoranam across the top, strings either side, the names centred, the haveli at the foot. */
+.hero{position:relative;min-height:min(max(var(--vh),620px),980px);overflow:hidden;display:flex;flex-direction:column;
+  background:radial-gradient(80% 52% at 50% 40%,rgba(255,251,245,.9),rgba(255,251,245,0) 74%),radial-gradient(140% 105% at 50% 46%,transparent 62%,rgba(140,96,60,.13))}
+.hero-frame{position:absolute;inset:12px;z-index:1;pointer-events:none;border:1px solid rgba(168,128,62,.62)}
+.hero-frame::before{content:'';position:absolute;inset:4px;border:1px solid rgba(168,128,62,.32)}
+.hero-frame .c{position:absolute;width:30px;height:30px}
+.hero-frame .tl{left:-2px;top:-2px}
+.hero-frame .tr{right:-2px;top:-2px;transform:scaleX(-1)}
+.hero-frame .bl{left:-2px;bottom:-2px;transform:scaleY(-1)}
+.hero-frame .br{right:-2px;bottom:-2px;transform:scale(-1)}
+.toran{position:absolute;top:13px;left:13px;right:13px;z-index:3}
+.ladis{position:absolute;inset:0;z-index:2;pointer-events:none}
+.ladi-wrap{position:absolute;top:16px;margin-left:-9px;transform-origin:50% 0}
+.ladi-wrap svg{transform-origin:50% 0;animation:sway var(--sway,5s) ease-in-out var(--sway-delay,0s) infinite alternate;will-change:transform}
+@keyframes sway{from{transform:rotate(-1.2deg)}to{transform:rotate(1.2deg)}}
+.hero-text{position:relative;z-index:4;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px 12% 10px;text-align:center}
+.crest{width:46px;margin-bottom:14px}
+.hero .label{color:#7f5a1f}
+.couple{display:flex;flex-direction:column;align-items:center;margin-top:12px}
+.namam{width:150px;height:auto;margin-bottom:6px;filter:brightness(.82) saturate(1.25)}
+.mantra{font:600 11.5px/1.6 var(--serif);letter-spacing:.2em;text-transform:uppercase;color:#8f6a28;padding-left:.2em;text-wrap:balance;max-width:210px}
+.invite-line{margin-top:12px;max-width:210px;font-size:11px;letter-spacing:.2em;line-height:1.8;text-wrap:balance}
+.couple .person{display:flex;flex-direction:column;align-items:center}
+.couple .pname{font:600 clamp(38px,11vw,50px)/1 var(--serif);letter-spacing:-.01em;color:#5a1d2e;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.couple .parents{font:italic 500 clamp(14px,4vw,17px)/1.3 var(--serif);color:var(--ink-soft);margin-top:6px;text-wrap:balance}
+.couple .amp{font:italic 500 clamp(28px,8vw,34px)/1 var(--serif);color:var(--red);margin:8px 0 8px;letter-spacing:0}
+.divider{width:150px;margin-top:16px}
+.hero-date{font:italic 500 21px/1.3 var(--serif);color:var(--ink-soft);margin-top:12px}
+.palace{position:relative;z-index:1;flex:none;margin:0 20px 42px;text-align:center}
+.palace img{display:inline-block;width:58%;max-width:280px;height:auto}
+.muggulu{position:absolute;left:22px;right:22px;bottom:22px;z-index:1}
+
+/* ─── Sections ─────────────────────────────────────────────── */
+.sec{position:relative;padding:48px 28px;text-align:center}
+.border-top{margin:-36px -28px 30px}
+.dates{margin-top:22px;font:600 12px/1.9 var(--serif);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-faint)}
+.dates span{display:block;font:500 26px/1.2 var(--serif);letter-spacing:.01em;text-transform:none;color:var(--ink)}
+.lotus-mark{width:84px;margin:26px auto 0}
+
+.traditions{padding-top:24px;padding-bottom:16px}
+.arch-wrap{position:relative;width:min(86%,310px);margin:0 auto;aspect-ratio:360/490;container-type:inline-size}
+.arch{position:absolute;inset:0}
+.dunes{position:absolute;left:-18%;right:-18%;bottom:-4.5%;pointer-events:none}
+.dunes svg{display:block;width:100%;height:auto}
+.dunes{-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.camel{position:absolute;bottom:-.3%;width:clamp(50px,15.5vw,66px);pointer-events:none}
+.camel-l{right:calc(100% - 7% + 9px)}
+.camel-r{left:calc(100% - 7% + 9px)}
+.camel img{display:block;width:100%;height:auto}
+/* The camels walk in from either side of the screen and settle beside the arch, rocking gently with each step. */
+.js .camel-l{transform:translateX(calc(-100% - 70vw))}
+.js .camel-r{transform:translateX(calc(100% + 70vw))}
+.js .camel.in{transform:none;transition:transform 3.2s cubic-bezier(.25,.55,.35,1)}
+.js .camel.in img{animation:camel-step .64s ease-in-out 5}
+@keyframes camel-step{0%,100%{translate:0 0}25%{translate:0 -2.5px}50%{translate:0 0}75%{translate:0 -1.5px}}
+.camel-l img{transform:scaleX(-1)}
+.arch-text{position:absolute;left:17%;right:17%;top:31%;bottom:7%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.indic{display:flex;align-items:center;gap:10px;font-size:19px;color:var(--rose);margin-bottom:14px}
+@supports (width:1cqw){.indic{gap:3cqw;font-size:5.7cqw;margin-bottom:4.2cqw}}
+.indic span[lang=te]{font-family:'Tiro Telugu',serif}
+.indic span[lang=hi]{font-family:'Tiro Devanagari',serif}
+.indic i{width:5px;height:5px;transform:rotate(45deg);background:var(--red)}
+.traditions h2{font-size:clamp(28px,8vw,33px)}
+@supports (width:1cqw){.traditions h2{font-size:9.3cqw}}
+.duo{display:flex;align-items:center;gap:10px;margin-top:14px;font:600 11px/1 var(--serif);letter-spacing:.26em;text-transform:uppercase;color:var(--ink-faint)}
+.duo b{width:16px;height:1px;background:var(--red)}
+@supports (width:1cqw){.duo{gap:3cqw;margin-top:4.2cqw;font-size:max(9.5px,3.3cqw)}.duo b{width:4.8cqw}}
+.traditions .prose{font-size:17px;margin-top:12px;max-width:220px}
+@supports (width:1cqw){.traditions .prose{font-size:max(14.5px,5.1cqw);margin-top:3.6cqw;max-width:66cqw}}
+
+.celebrations{padding-top:56px}
+.celebrations .label{margin-top:10px}
+.timeline{position:relative;max-width:340px;margin:30px auto 0;text-align:left}
+.timeline::before{content:'';position:absolute;left:98px;top:6px;bottom:6px;border-left:2px dotted rgba(168,128,62,.55)}
+.tl-day{position:relative;padding:14px 0 12px 122px;font:italic 600 62px/.95 var(--serif);color:var(--rose);letter-spacing:-.01em}
+.tl-day em{font-size:26px;font-weight:500;letter-spacing:0;margin-left:2px}
+.tl-day span{display:block;margin-bottom:4px;font:600 12px/1.6 var(--serif);font-style:normal;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-faint)}
+.tl-day::before{content:'';position:absolute;left:94px;top:50%;width:10px;height:10px;margin-top:-5px;transform:rotate(45deg);background:linear-gradient(135deg,#f1d792,#a8803e);box-shadow:0 1px 2px rgba(60,30,20,.3)}
+.tl-item{display:grid;grid-template-columns:84px 1fr;column-gap:38px;align-items:center;min-height:118px;padding:6px 0}
+.tl-icon{width:84px;transition:transform .8s var(--ease)}
+.tl-item.lit .tl-icon{transform:scale(1.07)}
+.tl-time{font:600 12px/1.4 var(--serif);letter-spacing:.24em;text-transform:uppercase;color:var(--red)}
+.tl-body h3{font:500 28px/1.05 var(--serif);color:var(--ink);margin-top:2px}
+.tl-body p:last-child{font:italic 500 17px/1.4 var(--serif);color:var(--ink-soft);margin-top:4px}
+.muhurat .tl-time{font-size:13px;color:var(--rose)}
+.tl-pearl{position:absolute;left:99px;top:calc(6px + var(--p,0) * (100% - 24px));width:17px;height:17px;margin-left:-8.5px;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%,#fff 0,#f9f2ea 28%,#e1d2c6 70%,#b39e90 100%);box-shadow:0 2px 3px rgba(60,30,20,.3),0 0 0 3px rgba(255,250,240,.6)}
+
+.curtain{margin:0 -28px 14px}
+
+.venue{padding-top:24px;padding-bottom:24px}
+.venue h2{font-size:clamp(32px,9vw,38px)}
+.frame-wrap{position:relative;width:min(100%,360px);margin:0 auto;aspect-ratio:360/488}
+.frame-art{position:absolute;inset:0}
+.frame-text{position:absolute;left:13%;right:13%;top:27%;bottom:6%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.venue h2{margin-top:8px}
+.venue-name{font:600 11px/1.8 var(--serif);letter-spacing:.28em;text-transform:uppercase;color:var(--ink-faint);margin-top:10px}
+.venue .prose{font-size:17px;margin-top:6px;max-width:210px}
+.cal{display:flex;flex-direction:column;gap:9px;width:100%;max-width:220px;margin-top:20px}
+.cal a,.cal button{display:flex;width:100%;cursor:pointer;align-items:center;justify-content:center;gap:10px;min-height:46px;border:1px solid rgba(94,19,40,.35);border-radius:999px;font:600 13px/1 var(--serif);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--maroon);background:rgba(255,250,246,.5);transition:background .3s,color .3s,border-color .3s}
+.cal svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round}
+.cal a:hover,.cal button:hover{background:var(--maroon);color:#fbefe6;border-color:var(--maroon)}
+.cal .cal-yes{background:var(--red);border-color:var(--red);color:#fff6ee}
+.cal .cal-yes:hover{background:#8e1224;border-color:#8e1224}
+.zari,.zari-shadow{fill:none;stroke-dasharray:1;stroke-dashoffset:0}
+.zari{stroke:url(#e-gold);stroke-width:2.4;stroke-linejoin:round}
+.zari.thin{stroke-width:.9}
+.zari-shadow{stroke:rgba(59,26,28,.22);stroke-width:2.6}
+
+
+.countdown-sec .label{margin-top:8px}
+.medals{display:flex;justify-content:center;gap:8px;margin:26px auto 0;max-width:350px}
+.medal{position:relative;flex:1;max-width:80px;display:flex;flex-direction:column;align-items:center}
+.medal-ring{width:100%}
+.medal span{position:absolute;left:0;right:0;top:0;aspect-ratio:1;display:grid;place-items:center;font:600 clamp(22px,6.6vw,28px)/1 var(--serif);font-variant-numeric:tabular-nums lining-nums;color:var(--ink)}
+.medal span.tick{animation:tick .55s var(--ease)}
+@keyframes tick{from{opacity:.25;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.medal small{font:600 10px/1 var(--serif);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);margin-top:8px}
+.countdown-done{font:italic 500 30px/1.2 var(--serif);color:var(--rose)}
+.cd-date{font:italic 500 18px/1.4 var(--serif);color:var(--ink-soft);margin-top:20px}
+.necklace{margin:22px -10px 0}
+
+.gifts{padding-top:16px}
+.gift-wrap{aspect-ratio:360/330}
+.gift-wrap .frame-text{top:8%;bottom:8%}
+.gifts .lotus-mark{margin:0 auto 10px;width:76px}
+.gifts .prose{max-width:220px}
+
+.closing{padding-bottom:0}
+.closing h2{font-size:clamp(32px,9.5vw,40px)}
+.signoff{font:italic 500 20px/1.3 var(--serif);color:var(--ink-soft);margin-top:24px}
+.signature{font:400 clamp(44px,13vw,56px)/1.3 var(--script);color:var(--maroon);margin-top:2px}
+.signature span{font:italic 500 .7em var(--serif);color:var(--gold);margin:0 .08em}
+.closing .label{margin-top:4px}
+.replay{margin-top:26px;min-height:46px;padding:0 24px;border:1px solid rgba(94,19,40,.35);border-radius:999px;font:600 12px/1 var(--serif);letter-spacing:.2em;text-transform:uppercase;color:var(--maroon);transition:background .3s,color .3s}
+.replay:hover{background:var(--maroon);color:#fbefe6}
+.closing-band{width:min(100%,300px);margin:34px auto 0}
+
+/* ─── Curtains ─────────────────────────────────────────────── */
+/* Each pleat is its own strip (built in app.js) so the drape can gather into folds as it opens. */
+.doors{position:fixed;inset:0;z-index:100;display:none;--rod:calc(env(safe-area-inset-top) + 18px);--seal:clamp(176px,24vmin,240px);--seal-y:calc(50% - 20px)}
+.js .doors{display:block}
+.doors[hidden]{display:none}
+.wall{position:absolute;left:0;right:0;top:0;height:var(--rod);z-index:1;background:linear-gradient(#10020600,#10020680),#2a0a12;transition:opacity .6s}
+.door{position:absolute;top:0;bottom:0;width:50%;overflow:hidden;z-index:1;
+  background:repeating-linear-gradient(90deg,#2c0510 0,#5a1128 6px,#8c2a45 10px,#6b1531 15px,#2c0510 25px)}
+.door.hung{background:none}
+.door-l{left:0}
+.door-r{right:0}
+.pleat{position:absolute;top:calc(var(--rod) + 2px);bottom:-14px}
+.door-l .pleat{transform-origin:0 0}
+.door-r .pleat{transform-origin:100% 0}
+/* Each fold casts a soft shadow onto the one it overlaps, deepening as the drape gathers. */
+.pleat::before{content:'';position:absolute;top:0;bottom:0;width:9px;opacity:.5;transition:opacity .9s ease}
+.door-l .pleat::before{right:100%;background:linear-gradient(270deg,rgba(16,0,6,.5),transparent)}
+.door-r .pleat::before{left:100%;background:linear-gradient(90deg,rgba(16,0,6,.5),transparent)}
+.doors.open .pleat::before{opacity:1}
+.cloth{position:absolute;inset:0;transform-origin:50% 0;animation:billow 6.5s ease-in-out var(--bd) infinite alternate}
+.cloth.edge{animation:none}
+@keyframes billow{from{transform:skewX(-.22deg)}to{transform:skewX(.22deg)}}
+/* Light falls from the rod: shadow under the heading, a soft fall-off towards the floor. */
+.cloth::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,0,6,.6),rgba(16,0,6,.14) 4%,transparent 13%,transparent 58%,rgba(16,0,6,.38))}
+/* A single gilt edging down the leading edge. */
+.hem{position:absolute;top:0;bottom:0;width:11px;background:
+  linear-gradient(rgba(226,194,126,.7),rgba(226,194,126,.7)) 0 0/1px 100% no-repeat,
+  linear-gradient(90deg,#8a642c,#d8b76e 30%,#f5e2a9 52%,#cfab60 76%,#86602a) 100% 0/6px 100% no-repeat}
+.door-l .hem{right:7px}
+.door-r .hem{left:7px;transform:scaleX(-1)}
+.rod{position:absolute;left:0;right:0;top:calc(var(--rod) - 3.5px);height:7px;z-index:2;transition:opacity .5s}
+.rod::before{content:'';position:absolute;inset:0 -4px;border-radius:4px;background:linear-gradient(180deg,#fbeab4,#d8b261 35%,#97702c 68%,#c9a050 88%,#7a5620);box-shadow:0 3px 6px rgba(10,0,3,.55)}
+.hook{position:absolute;top:-3.5px;width:9px;height:13px;margin:0 -4.5px;border-radius:50%;border:1.5px solid;border-color:#f3dd9f #b18a3f #77551f #d4b266;box-shadow:0 1px 2px rgba(10,0,3,.4)}
+/* The monogram badge sits whole across the seam, and lifts away in a warm glow when tapped. */
+.door-badge{position:absolute;left:50%;top:var(--seal-y);z-index:3;width:var(--seal);margin:calc(var(--seal) / -2) 0 0 calc(var(--seal) / -2);pointer-events:none;transition:transform .25s ease}
+.door-badge .seal{width:100%;aspect-ratio:1;border-radius:50%;background:#fff;box-shadow:0 0 0 1.5px #c9a050,0 0 0 5px #fff,0 0 0 6.5px #d8b261,0 10px 18px rgba(20,3,8,.5);display:grid;place-items:center}
+.door-badge .seal img{width:92%;height:auto;display:block;filter:brightness(.86) saturate(1.2)}
+.halo{position:absolute;left:50%;top:50%;width:170%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(255,228,170,.6),rgba(255,208,140,.2) 55%,transparent);opacity:0;transform:translate(-50%,-50%) scale(.5)}
+.doors.pressing .door-badge{transform:scale(.95)}
+.door-btn{position:absolute;inset:0;z-index:3}
+.door-btn .ring{position:absolute;left:50%;top:var(--seal-y);width:calc(var(--seal) + 24px);height:calc(var(--seal) + 24px);margin:calc(var(--seal) / -2 - 12px) 0 0 calc(var(--seal) / -2 - 12px);border-radius:50%;border:1px solid rgba(246,222,170,.7);opacity:0;animation:ring 2.8s cubic-bezier(.2,.6,.3,1) 1.4s infinite}
+@keyframes ring{0%{transform:scale(.8);opacity:0}20%{opacity:.9}100%{transform:scale(1.35);opacity:0}}
+.door-for{position:absolute;left:0;right:0;top:calc(var(--seal-y) + var(--seal) / 2 + 22px);z-index:4;padding:11px 16px 13px;text-align:center;font:italic 500 22px/1.25 var(--serif);color:#f6e3c8;pointer-events:none;transition:opacity .5s;background:linear-gradient(180deg,#7a1c36,#5a1229 55%,#43091c);box-shadow:inset 0 1px 0 rgba(255,220,170,.25),0 0 0 1px rgba(214,178,108,.55),0 1px 0 2px rgba(60,10,20,.35),0 10px 22px -6px rgba(20,3,8,.55);border-top:1px solid #c9a35d;border-bottom:1px solid #c9a35d}
+.door-for small{display:block;font:600 11px/1.8 var(--serif);font-style:normal;letter-spacing:.32em;text-transform:uppercase;color:#d9b97c}
+.door-hint{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom) + 40px);z-index:4;text-align:center;padding:11px 20px 11px 24px;border-radius:999px;background:rgba(58,9,24,.82);box-shadow:0 0 0 1px rgba(214,178,108,.5);white-space:nowrap;font:600 12px/1 var(--serif);letter-spacing:.34em;text-transform:uppercase;color:#ebcf9c;pointer-events:none;animation:breathe 2.6s ease-in-out infinite;transition:opacity .4s}
+@keyframes breathe{0%,100%{opacity:.55}50%{opacity:1}}
+.doors.open .door-btn{display:none}
+.doors .door-for,.doors .door-hint{transition:opacity .6s ease 1.7s}
+.doors.open .door-for,.doors.open .door-hint{opacity:0;animation:none;transition:opacity .4s}
+.doors.open .rod,.doors.open .wall{opacity:0;transition:opacity .6s ease 1.7s}
+
+.petals{position:fixed;inset:0;width:100%;height:100%;z-index:90;pointer-events:none}
+
+/* ─── Motion: the opening, and reveals as you scroll ───────── */
+.js .h-in{opacity:0;transform:translateY(14px);filter:blur(5px)}
+.opened .h-in{opacity:1;transform:none;filter:none;transition:opacity 1.2s ease calc(1s + var(--d) * .2s),transform 1.4s var(--ease) calc(1s + var(--d) * .2s),filter 1.2s ease calc(1s + var(--d) * .2s)}
+.js .toran{transform:translateY(-110%)}
+.opened .toran{animation:toran-drop 1.6s cubic-bezier(.3,.9,.3,1) .45s both}
+@keyframes toran-drop{0%{transform:translateY(-110%)}62%{transform:translateY(5%)}80%{transform:translateY(-1.6%)}100%{transform:none}}
+.js .ladi-wrap{transform:translateY(-102%)}
+.opened .ladi-wrap{animation:ladi-drop 1.5s cubic-bezier(.3,.9,.35,1) calc(.75s + var(--i) * .09s) both}
+@keyframes ladi-drop{0%{transform:translateY(-102%)}70%{transform:translateY(2.5%)}100%{transform:none}}
+.js .hero-frame{opacity:0}
+.opened .hero-frame{opacity:1;transition:opacity 1.4s ease .2s}
+/* The haveli is drawn in gilt line, rising from the ground; its soft washes settle in once it stands. */
+/* The gap is longer than the path, so no rounded end shows before a line starts drawing. */
+.js .palace img{clip-path:inset(100% 0 0 0)}
+.js .palace .ln{stroke-dasharray:1 2;stroke-dashoffset:1.02}
+.opened .palace img{clip-path:inset(0);transition:clip-path 3.4s cubic-bezier(.45,0,.25,1) 1.1s}
+.opened .palace .ln{stroke-dashoffset:0;transition:stroke-dashoffset 2.4s cubic-bezier(.45,0,.25,1) calc(1.1s + var(--dl))}
+.js .palace .washes,.js .palace circle{opacity:0}
+.opened .palace .washes,.opened .palace circle{opacity:1;transition:opacity 1.6s ease 2.9s}
+.js .hero .muggulu{clip-path:inset(0 50%)}
+.opened .hero .muggulu{clip-path:inset(-30% -2%);transition:clip-path 2.4s cubic-bezier(.6,0,.2,1) 1.3s}
+
+.js .reveal{opacity:0;transform:translateY(18px)}
+.js .reveal.in{opacity:1;transform:none;transition:opacity 1s ease var(--rd,0s),transform 1.2s var(--ease) var(--rd,0s)}
+.js .unroll{clip-path:inset(0 50% 0 50%)}
+.js .unroll.in{clip-path:inset(-20% -2% -20% -2%);transition:clip-path 1.9s cubic-bezier(.6,0,.2,1)}
+.js .curtain.unroll{clip-path:inset(0 0 100% 0)}
+.js .curtain.unroll.in{clip-path:inset(-5% 0 -10% 0);transition:clip-path 2.4s cubic-bezier(.5,0,.25,1)}
+.js .bloom{opacity:0;transform:scale(.78) rotate(-8deg)}
+.js .bloom.in{opacity:1;transform:none;transition:opacity .9s ease var(--rd,0s),transform 1.3s cubic-bezier(.2,1.35,.4,1) var(--rd,0s)}
+.js .bloom-arch{clip-path:inset(100% 0 0 0)}
+.js .bloom-arch.in{clip-path:inset(-4% -4% -4% -4%);transition:clip-path 2.8s cubic-bezier(.45,0,.2,1)}
+.js .stitch-in .zari,.js .stitch-in .zari-shadow{stroke-dashoffset:1}
+.js .stitch-in.in .zari,.js .stitch-in.in .zari-shadow{stroke-dashoffset:0;transition:stroke-dashoffset 3s cubic-bezier(.45,0,.2,1)}
+.js .stitch-in g{opacity:0}
+.js .stitch-in.in g{opacity:1;transition:opacity 1.4s ease 1.1s}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ladi-wrap svg,.cloth,.door-hint,.door-btn .ring{animation:none!important}
+  .js .h-in,.js .reveal,.js .bloom,.js .camel{transform:none;filter:none}
+  .js .camel.in img{animation:none}
+  .opened .h-in,.js .reveal.in,.js .bloom.in{transition:opacity .5s ease}
+  .opened .toran,.opened .ladi-wrap{animation:none;transform:none}
+  .js .unroll,.js .curtain.unroll,.js .bloom-arch,.js .hero .muggulu{clip-path:none}
+  .js .palace .ln{stroke-dashoffset:0}
+  .js .palace img{clip-path:none}
+  .js .palace .washes,.js .palace circle,.js .hero-frame{opacity:1}
+  .js .stitch-in .zari,.js .stitch-in .zari-shadow{stroke-dashoffset:0}
+  .js .stitch-in g{opacity:1}
+}
+.page-hidden *,.page-hidden *::before,.page-hidden *::after{animation-play-state:paused!important}
+
+/* ─── Pop-ups ──────────────────────────────────────────────── */
+.sheet{border:0;padding:26px 24px 24px;width:min(88vw,340px);border-radius:14px;background:#f8efe4 url('assets/cotton-paper.webp') center/420px;background-blend-mode:multiply;color:var(--ink);text-align:center;box-shadow:0 0 0 1px rgba(168,128,62,.6),0 0 0 5px #f8efe4,0 0 0 6px rgba(168,128,62,.45),0 24px 60px rgba(30,6,12,.5)}
+.sheet::backdrop{background:rgba(40,8,16,.55);backdrop-filter:blur(2px)}
+.sheet h3{font:600 28px/1.1 var(--serif);margin:4px 0 0}
+.sheet p{font:italic 500 18px/1.4 var(--serif);color:var(--ink-soft);margin:8px 0 0}
+.sheet-x{position:absolute;right:10px;top:6px;width:36px;height:36px;border:0;background:none;font:400 28px/1 var(--serif);color:var(--ink-soft);cursor:pointer}
+.sheet-links{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.sheet-links a,.sheet-go{display:flex;align-items:center;justify-content:center;min-height:46px;border:1px solid rgba(94,19,40,.4);border-radius:999px;font:600 13px/1 var(--serif);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--maroon);background:rgba(255,250,246,.55);cursor:pointer;width:100%}
+.sheet-links a:hover{background:var(--maroon);color:#fbefe6}
+.sheet-go{background:var(--red);border-color:var(--red);color:#fff6ee;margin-top:18px}
+.sheet label{display:block;text-align:left;margin-top:14px;font:600 11px/1.4 var(--serif);letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+.sheet input[type=text],.sheet input[type=number]{display:block;width:100%;margin-top:6px;padding:11px 12px;border:1px solid rgba(94,19,40,.35);border-radius:8px;background:rgba(255,252,248,.8);font:500 19px/1.2 var(--serif);color:var(--ink)}
+.sheet input:focus{outline:2px solid rgba(179,24,47,.5);outline-offset:1px}
+.sheet .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.rsvp-err{color:var(--red)!important;font-size:16px!important}
+.rsvp-done b{font-weight:600;color:var(--rose)}
+.party{border:0;margin:16px 0 0;padding:0;min-width:0;display:flex;flex-wrap:wrap;gap:10px}
+.party legend{width:100%;padding:0;margin-bottom:-2px;text-align:left;font:600 11px/1.4 var(--serif);letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+.party label{flex:1 1 calc(50% - 5px)}
+.sheet .party label{margin:0;position:relative}
+.party input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.party span{display:flex;align-items:center;justify-content:center;min-height:50px;border:1px solid rgba(94,19,40,.35);border-radius:999px;font:600 18px/1 var(--serif);letter-spacing:.04em;text-transform:none;color:var(--maroon);background:rgba(255,252,248,.8);transition:background .2s,color .2s,border-color .2s}
+.party input:checked+span{background:var(--maroon);border-color:var(--maroon);color:#fbefe6}
+.party input:focus-visible+span{outline:2px solid rgba(179,24,47,.55);outline-offset:2px}

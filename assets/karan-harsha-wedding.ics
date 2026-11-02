@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Karan and Harsha//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:karan-harsha-wedding-20270224@wedding-invitation.local
+DTSTAMP:20261031T000000Z
+DTSTART;VALUE=DATE:20270224
+DTEND;VALUE=DATE:20270226
+SUMMARY:Karan & Harsha's Wedding
+DESCRIPTION:24 February: Haldi at 11:00 AM\; Sangeet at 8:00 PM.\n25 Februa
+ ry: Baraat at 9:00 AM\; Wedding Muhurat at 11:42 AM.\nAll times are Ind
+ ia Standard Time (UTC+05:30).
+LOCATION:Dhawan Celebrations\, Gorewada\, Nagpur
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
