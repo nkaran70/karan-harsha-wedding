@@ -91,13 +91,13 @@ a{color:inherit;-webkit-tap-highlight-color:transparent}
 .dunes{position:absolute;left:-18%;right:-18%;bottom:-4.5%;pointer-events:none}
 .dunes svg{display:block;width:100%;height:auto}
 .dunes{-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
-.camel{--cw:clamp(48px,14.5vw,62px);position:absolute;bottom:-5.5%;width:var(--cw);pointer-events:none}
-.camel-l{left:calc(50% - 30px - var(--cw))}
-.camel-r{left:calc(50% + 30px)}
+.camel{position:absolute;bottom:-.3%;width:clamp(50px,15.5vw,66px);pointer-events:none}
+.camel-l{right:calc(100% - 7% + 9px)}
+.camel-r{left:calc(100% - 7% + 9px)}
 .camel img{display:block;width:100%;height:auto}
 /* The camels walk in from either side of the screen and settle beside the arch, rocking gently with each step. */
-.js .camel-l{transform:translateX(calc(-1 * (min(100vw,480px) / 2 + 10px)))}
-.js .camel-r{transform:translateX(calc(min(100vw,480px) / 2 + 10px))}
+.js .camel-l{transform:translateX(calc(-100% - 70vw))}
+.js .camel-r{transform:translateX(calc(100% + 70vw))}
 .js .camel.in{transform:none;transition:transform 3.2s cubic-bezier(.25,.55,.35,1)}
 .js .camel.in img{animation:camel-step .64s ease-in-out 5}
 @keyframes camel-step{0%,100%{translate:0 0}25%{translate:0 -2.5px}50%{translate:0 0}75%{translate:0 -1.5px}}
