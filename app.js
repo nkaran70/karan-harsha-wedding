@@ -12,6 +12,18 @@
   const doors = $('#doors');
   const live = $('#live');
 
+  /* ── Weak devices: the same design with the costliest effects swapped for cheap ones (see html.lite in styles.css) ── */
+  const lite = () => root.classList.contains('lite');
+  if (!lite() && !/[?&]lite=0/.test(location.search)) {
+    // Backstop for phones that look capable but are slow: time ~40 frames while the curtains hang.
+    let n = 0, t0 = 0;
+    requestAnimationFrame(function probe(t) {
+      if (!t0) t0 = t;
+      if (++n < 40) return requestAnimationFrame(probe);
+      if ((t - t0) / (n - 1) > 26) root.classList.add('lite');
+    });
+  }
+
   /* ── Embroidery ── */
   $('#art-defs').innerHTML = Art.defs();
   $$('[data-art]').forEach(el => {
@@ -285,19 +297,27 @@
   /* ── Timeline: a pearl slides down the thread with the scroll ── */
   const timeline = $('#timeline');
   const tlItems = $$('.tl-item');
-  let scrollFrame = 0;
+  let scrollFrame = 0, tlTop = 0, tlH = 1, tlMarks = [];
+  // Layout is measured once (and on resize/reveal), so scrolling only does arithmetic.
+  function measureTimeline() {
+    const y = scrollY, r = timeline.getBoundingClientRect();
+    tlTop = r.top + y; tlH = r.height || 1;
+    tlMarks = tlItems.map(item => { const ir = item.getBoundingClientRect(); return ir.top + y + ir.height * .45 - tlTop; });
+  }
   function onScroll() {
     scrollFrame = 0;
-    const r = timeline.getBoundingClientRect();
-    if (r.bottom < -100 || r.top > innerHeight + 100) return;
-    const p = clamp((innerHeight * .55 - r.top) / r.height, 0, 1);
+    const top = tlTop - scrollY;
+    if (top + tlH < -100 || top > innerHeight + 100) return;
+    const p = clamp((innerHeight * .55 - top) / tlH, 0, 1);
     timeline.style.setProperty('--p', p.toFixed(4));
-    const reach = r.top + p * r.height;
-    tlItems.forEach(item => {
-      const ir = item.getBoundingClientRect();
-      item.classList.toggle('lit', ir.top + ir.height * .45 < reach);
-    });
+    const reach = p * tlH;
+    tlItems.forEach((item, i) => item.classList.toggle('lit', tlMarks[i] < reach));
   }
+  measureTimeline();
+  addEventListener('load', measureTimeline);
+  addEventListener('resize', () => { measureTimeline(); onScroll(); });
+  // reveals shift transforms, not layout, but fonts/art can change heights: re-measure when the timeline nears
+  if ('ResizeObserver' in window) new ResizeObserver(measureTimeline).observe(timeline);
   addEventListener('scroll', () => { if (!scrollFrame) scrollFrame = requestAnimationFrame(onScroll); }, {passive: true});
 
   /* ── Countdown to the muhurat ── */
@@ -365,7 +385,8 @@
     let list = [], raf = 0, last = 0, W = 0, H = 0, dpr = 1;
     function burst(count, spread) {
       if (reduced()) return;
-      dpr = Math.min(2, devicePixelRatio || 1);
+      if (lite()) count = Math.ceil(count * .5);
+      dpr = lite() ? 1 : Math.min(2, devicePixelRatio || 1);
       W = innerWidth; H = innerHeight;
       canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
       for (let i = 0; i < count; i++) {
@@ -417,4 +438,9 @@
     if (document.hidden) { clearInterval(cdTimer); petals.stop(); } else startCountdown();
   });
   hero.tabIndex = -1;
+
+  // The hanging strings sway forever; stop spending frames on them once the hero has scrolled away.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => root.classList.toggle('hero-off', !e.isIntersecting)).observe(hero);
+  }
 })();
