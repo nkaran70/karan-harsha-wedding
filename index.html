@@ -12,19 +12,12 @@
   <link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/cormorant-garamond-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/pinyon-script-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" href="assets/paper-invite.webp">
-  <link rel="stylesheet" href="styles.css?v=54">
-  <script>
-    // Weak phones (few cores / little memory) get a lighter rendering of the same design; ?lite=1 or ?lite=0 forces it.
-    (function () {
-      var q = /[?&]lite=([01])/.exec(location.search), n = navigator;
-      var lite = q ? q[1] === '1' : (n.hardwareConcurrency || 8) <= 4 || (n.deviceMemory || 8) <= 3;
-      document.documentElement.className = 'js locked curtained' + (lite ? ' lite' : '');
-    })();
-  </script>
-  <script src="art.js?v=54" defer></script>
-  <script src="app.js?v=54" defer></script>
-  <script src="rsvp.js?v=54" defer></script>
+  <link rel="preload" as="image" href="assets/cotton-paper.webp">
+  <link rel="stylesheet" href="styles.css?v=53">
+  <script>document.documentElement.className = 'js locked curtained';</script>
+  <script src="art.js?v=53" defer></script>
+  <script src="app.js?v=53" defer></script>
+  <script src="rsvp.js?v=53" defer></script>
 </head>
 <body>
 <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false"><defs id="art-defs"></defs></svg>
@@ -37,7 +30,7 @@
     <div class="ladis" id="ladis" aria-hidden="true"></div>
     <div class="toran" data-art="thoranam"></div>
     <div class="hero-text">
-      <img class="namam h-in" style="--d:0" src="assets/balaji-gold.png?v=54" width="720" height="292" alt="Chakra, namam and shankha of Lord Balaji">
+      <img class="namam h-in" style="--d:0" src="assets/balaji-gold.png?v=53" width="720" height="292" alt="Chakra, namam and shankha of Lord Balaji">
       <p class="mantra h-in" style="--d:1">Om Shri Venkateshwaraya Namah</p>
       <p class="label invite-line h-in" style="--d:2">We request the pleasure of your company at the wedding of</p>
       <h1 class="couple" id="couple">
@@ -155,7 +148,7 @@
   <div class="door door-l"></div>
   <div class="door door-r"></div>
   <div class="rod" id="rod"></div>
-  <div class="door-badge" id="badge"><i class="halo"></i><div class="seal"><img src="assets/seal-gold.png?v=54" alt="Harsha &amp; Karan, a celebration of love and friendship, 25 02 2027" width="540" height="562" style="width:92%;height:auto"></div></div>
+  <div class="door-badge" id="badge"><i class="halo"></i><div class="seal"><img src="assets/seal-gold.png?v=53" alt="Harsha &amp; Karan, a celebration of love and friendship, 25 02 2027" width="540" height="562" style="width:92%;height:auto"></div></div>
   <button class="door-btn" id="open-doors" type="button" aria-label="Open the invitation"><span class="ring"></span></button>
   <p class="door-for" id="door-for" hidden></p>
   <p class="door-hint">Tap to open</p>
