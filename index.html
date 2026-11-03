@@ -12,14 +12,24 @@
   <link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/cormorant-garamond-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/pinyon-script-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" href="assets/paper-invite.webp">
-  <link rel="stylesheet" href="styles.css?v=54">
+    <link rel="stylesheet" href="styles.css?v=54">
   <script>
-    // Weak phones (few cores / little memory) get a lighter rendering of the same design; ?lite=1 or ?lite=0 forces it.
+    // Three rendering tiers of one design. top = as designed; mid and base swap only the costliest effects
+    // for cheap equivalents (see .t-mid / .t-base in styles.css). ?tier=top|mid|base forces one.
     (function () {
-      var q = /[?&]lite=([01])/.exec(location.search), n = navigator;
-      var lite = q ? q[1] === '1' : (n.hardwareConcurrency || 8) <= 4 || (n.deviceMemory || 8) <= 3;
-      document.documentElement.className = 'js locked curtained' + (lite ? ' lite' : '');
+      var n = navigator, ua = n.userAgent, q = /[?&]tier=(top|mid|base)/.exec(location.search), tier;
+      if (q) tier = q[1];
+      else {
+        var cores = n.hardwareConcurrency || 0, mem = n.deviceMemory || 0;
+        var ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && n.maxTouchPoints > 1);
+        if (ios) tier = cores >= 6 ? 'top' : 'mid';
+        else if (mem) tier = mem >= 8 ? 'top' : mem >= 4 ? 'mid' : 'base';
+        else tier = cores >= 8 ? 'top' : cores >= 4 ? 'mid' : 'base';
+      }
+      document.documentElement.className = 'js locked curtained t-' + tier;
+      var l = document.createElement('link');
+      l.rel = 'preload'; l.as = 'image'; l.href = tier === 'top' ? 'assets/cotton-paper.webp' : 'assets/paper-invite.webp';
+      document.head.appendChild(l);
     })();
   </script>
   <script src="art.js?v=54" defer></script>

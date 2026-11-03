@@ -12,15 +12,16 @@
   const doors = $('#doors');
   const live = $('#live');
 
-  /* ── Weak devices: the same design with the costliest effects swapped for cheap ones (see html.lite in styles.css) ── */
-  const lite = () => root.classList.contains('lite');
-  if (!lite() && !/[?&]lite=0/.test(location.search)) {
-    // Backstop for phones that look capable but are slow: time ~40 frames while the curtains hang.
+  /* ── Tiers (see index.html): a slow-frame check steps a phone down one tier if it was over-rated ── */
+  const tier = () => (root.className.match(/\bt-(top|mid|base)\b/) || [])[1];
+  const lite = () => tier() === 'base';
+  const light = () => tier() !== 'top';
+  if (!/[?&]tier=/.test(location.search)) {
     let n = 0, t0 = 0;
     requestAnimationFrame(function probe(t) {
       if (!t0) t0 = t;
       if (++n < 40) return requestAnimationFrame(probe);
-      if ((t - t0) / (n - 1) > 26) root.classList.add('lite');
+      if ((t - t0) / (n - 1) > 26 && tier() !== 'base') root.className = root.className.replace(/\bt-(top|mid)\b/, (m, x) => x === 'top' ? 't-mid' : 't-base');
     });
   }
 
@@ -306,6 +307,15 @@
   }
   function onScroll() {
     scrollFrame = 0;
+    if (!light()) {   // top tier: measure live, as originally designed
+      const r = timeline.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > innerHeight + 100) return;
+      const p = clamp((innerHeight * .55 - r.top) / r.height, 0, 1);
+      timeline.style.setProperty('--p', p.toFixed(4));
+      const reach = r.top + p * r.height;
+      tlItems.forEach(item => { const ir = item.getBoundingClientRect(); item.classList.toggle('lit', ir.top + ir.height * .45 < reach); });
+      return;
+    }
     const top = tlTop - scrollY;
     if (top + tlH < -100 || top > innerHeight + 100) return;
     const p = clamp((innerHeight * .55 - top) / tlH, 0, 1);
@@ -385,8 +395,8 @@
     let list = [], raf = 0, last = 0, W = 0, H = 0, dpr = 1;
     function burst(count, spread) {
       if (reduced()) return;
-      if (lite()) count = Math.ceil(count * .5);
-      dpr = lite() ? 1 : Math.min(2, devicePixelRatio || 1);
+      if (light()) count = Math.ceil(count * (lite() ? .5 : .75));
+      dpr = lite() ? 1 : Math.min(tier() === 'mid' ? 1.5 : 2, devicePixelRatio || 1);
       W = innerWidth; H = innerHeight;
       canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
       for (let i = 0; i < count; i++) {
