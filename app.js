@@ -29,7 +29,23 @@
   $('#art-defs').innerHTML = Art.defs();
   $$('[data-art]').forEach(el => {
     const make = Art[el.dataset.art];
-    if (make) el.innerHTML = make(el.dataset.seed ? Number(el.dataset.seed) : undefined);
+    const draw = () => { if (make) el.innerHTML = make(el.dataset.seed ? Number(el.dataset.seed) : undefined); };
+    if (!el.dataset.img) return draw();
+    // The big lit-embroidery pieces are shipped as images of that same drawing: revealing a picture is cheap,
+    // re-lighting a filtered SVG on every frame of a reveal is not. The live drawing is the fallback.
+    // pad = [top, right, bottom, left, width] in the pixels the picture was drawn at; used as % so it scales with the box
+    const [t, r, b, l, w] = el.dataset.pad.split(',').map(Number), pc = v => `${(v / w * 100).toFixed(3)}%`;
+    el.style.display = 'flow-root';
+    const img = new Image();
+    img.className = 'art art-img';
+    img.alt = '';
+    img.decoding = 'async';
+    img.setAttribute('aria-hidden', 'true');
+    img.style.cssText = `display:block;max-width:none;height:auto;width:${(100 + (l + r) / w * 100).toFixed(3)}%;margin:-${pc(t)} -${pc(r)} -${pc(b)} -${pc(l)}`;
+    img.onerror = draw;
+    img.src = el.dataset.img;
+    el.appendChild(img);
+    if (img.decode) img.decode().catch(() => {});   // decode now, not mid-reveal
   });
 
   // Strings of gold, pearl and jasmine hang from the thoranam either side of the names.
